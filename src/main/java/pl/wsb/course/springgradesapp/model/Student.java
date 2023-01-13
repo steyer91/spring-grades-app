@@ -2,7 +2,11 @@ package pl.wsb.course.springgradesapp.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 @Entity
+@Table
 public class Student {
     @Id
     @SequenceGenerator(
@@ -26,16 +30,23 @@ public class Student {
     )
     private String firstName;
     @Column(
-            name = "first_name",
+            name = "last_name",
             nullable = false,
             columnDefinition = "TEXT"
     )
     private String LastName;
+    private LocalDate birth;
 
-    public Student(Long id, String firstName, String lastName) {
-        this.id = id;
+    @Transient
+    private Integer age;
+
+    public Student(String firstName, String lastName, LocalDate birth) {
         this.firstName = firstName;
-        LastName = lastName;
+        this.LastName = lastName;
+        this.birth = birth;
+    }
+    public Student() {
+
     }
 
     public Long getId() {
@@ -62,6 +73,14 @@ public class Student {
         LastName = lastName;
     }
 
+    public LocalDate getBirth() {
+        return birth;
+    }
+
+    public void setBirth(LocalDate birth) {
+        this.birth = birth;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -69,5 +88,14 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 '}';
+    }
+
+
+    public Integer getAge() {
+        return Period.between(birth, LocalDate.now()).getYears();
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
