@@ -37,13 +37,22 @@ public class Student {
     private String LastName;
     private LocalDate birth;
 
+    @Column(
+            name = "pesel",
+            nullable = false,
+            columnDefinition = "TEXT",
+            unique = true
+    )
+    private String pesel;
+
     @Transient
     private Integer age;
 
-    public Student(String firstName, String lastName, LocalDate birth) {
+    public Student(String firstName, String lastName, LocalDate birth, String pesel) {
         this.firstName = firstName;
         this.LastName = lastName;
         this.birth = birth;
+        this.pesel = pesel;
     }
     public Student() {
 
@@ -81,6 +90,25 @@ public class Student {
         this.birth = birth;
     }
 
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
+
+    public Integer getAge() {
+
+        return Period.between(birth, LocalDate.now()).getYears();
+    }
+
+    public void setAge(Integer age) {
+
+        this.age = age;
+    }
+
+
     @Override
     public String toString() {
         return "Student{" +
@@ -91,11 +119,5 @@ public class Student {
     }
 
 
-    public Integer getAge() {
-        return Period.between(birth, LocalDate.now()).getYears();
-    }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
 }
