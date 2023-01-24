@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -44,6 +47,10 @@ public class Student {
             unique = true
     )
     private String pesel;
+
+    @OneToMany(mappedBy = "student")
+    Set<Grade> grades;
+
 
     @Transient
     private Integer age;
@@ -107,17 +114,5 @@ public class Student {
 
         this.age = age;
     }
-
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                '}';
-    }
-
-
 
 }

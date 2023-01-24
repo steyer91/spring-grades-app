@@ -14,8 +14,8 @@ public class HomeController {
     private UserRepository userRepo;
 
     @GetMapping("/home")
-    public String viewHomePage() {
-        return "index";
+    public String home(){
+        return "home";
     }
 
     }

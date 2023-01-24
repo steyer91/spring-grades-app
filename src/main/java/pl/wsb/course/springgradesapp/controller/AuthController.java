@@ -29,7 +29,7 @@ public class AuthController {
 
     // handler method to handle home page request
     @GetMapping("/index")
-    public String home(){
+    public String index(){
         return "index";
     }
 
@@ -67,10 +67,5 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
-    @GetMapping("/students")
-    public String users(Model model){
-        List<StudentDto> users = studentService.getAll();
-        model.addAttribute("students", users);
-        return "students";
-    }
+
 }
